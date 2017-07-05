@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #03436A;
+  font: 100% sans-serif;
+  color: #DDD;
+}
+
+input {
+  background: #0969A2;
+  color: #DDD;
+  border: 1px solid #0969A2;
+  padding: 3px;
+}
+
+input:disabled {
+  background: #245A7A;
+  color: #64A8D1;
+}
+
+button {
+  background: #64A8D1;
+  color: #03436A;
+  border: 1px solid #0969A2;
+  padding: 3px;
+}
+
+.conway-btn-pressed {
+  background: #0969A2;
+  color: #64A8D1;
+}
+
+.conway-panel-inline, .conway-board {
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.conway-panel-inline .conway-control-group {
+  float: left;
+  margin-left: 10px;
+}
+
+.conway-panel-inline .conway-btn {
+  float: left;
+  margin-left: 10px;
+}
+
+.conway-panel-inline .conway-btn {
+  float: left;
+  margin-left: 10px;
+}
+
+.conway-panel-inline :nth-child(1) {
+  margin-left: 0px;
+}
+
+.conway-board {
+  position: relative;
+}
+
+.conway-cell {
+  position: absolute;
+  height:40px;
+  width:40px;
+  border: 1px solid #36D986;
+  background: #228653;
+  cursor: pointer;
+}
+
+.conway-cell-dead {
+  background: #228653
+}
+
+.conway-cell-live {
+  background: #62D99C
+}
+
+

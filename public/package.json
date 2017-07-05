@@ -1,0 +1,29 @@
+{
+  "name": "public",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "jquery": "^3.2.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "requirejs": "^2.3.3",
+    "requirejs-babel": "0.0.9"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-react": "^6.24.1"
+  }
+}
