@@ -4,7 +4,7 @@ let _ = require('underscore');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Conway' });
 });
 
 router.post('/do-game', function(req, res, next) {
@@ -40,7 +40,7 @@ router.post('/do-game', function(req, res, next) {
     }
 
     let jPlus1Index = j + 1;
-    if (j == matrix.length-1) {
+    if (j == row.length-1) {
       jPlus1Index = 0;
       if (jPlus1Index >= j-1) jPlus1Index = -1;
     }
