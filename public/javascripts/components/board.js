@@ -18,12 +18,18 @@ class Board extends React.Component {
     }
 
     changeCellHandler(offsetX, offsetY, live){
+        let self = this;
         this.matrix[offsetX][offsetY] = live;
-        this.setState({matrixState: this.state.matrixState++});
+        this.setState((prevState, props) => {
+            self.props.onStateChange(prevState.matrixState+1);
+            return {matrixState: prevState.matrixState+1}
+        });
+        
     }
 
     _blankMatrix() {
         this.setState({matrixState: 0});
+        this.props.onStateChange(0);
         this.matrix = new Array()
         for (let i = 0; i < this.props.M; i++) {
             let row = new Array();
@@ -31,6 +37,17 @@ class Board extends React.Component {
                 row.push(false);
             }
             this.matrix.push(row);
+        }
+    }
+    
+    _setInitMatrix(initMatrix) {
+        if (!initMatrix || !initMatrix.length) return;
+        for (let i = 0; i < this.props.M; i++) {
+            for (let j = 0; j < this.props.N; j++) {
+                if (i<initMatrix.length && j<initMatrix[0].length) {
+                    this.matrix[i][j] = initMatrix[i][j];
+                }
+            }
         }
     }
 
@@ -47,7 +64,10 @@ class Board extends React.Component {
             })
                 .done(function(response) {
                     self.matrix = response.matrix;
-                    self.setState({matrixState: self.state.matrixState++});
+                    self.setState((prevState, props) => {
+                        self.props.onStateChange(prevState.matrixState+1);
+                        return {matrixState: prevState.matrixState+1}
+                    });
                     self._requestInProgress = false;
                     if (response.stop_game) self.stopGame();
                 })
@@ -81,6 +101,10 @@ class Board extends React.Component {
                 this.intervalId = setInterval(this.sendRequest, 600);
             }
             this._started = this.props.started;
+        }
+
+        if (this.props.initMatrix && this.props.initMatrix.state == this.state.matrixState) {
+            this._setInitMatrix(this.props.initMatrix.matrix);
         }
 
         const cells = new Array();

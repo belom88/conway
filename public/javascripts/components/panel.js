@@ -7,6 +7,7 @@ class Panel extends React.Component {
         super(props);
         this.changeFormValueHandler = this.changeFormValueHandler.bind(this);
         this.clickStartHandler = this.clickStartHandler.bind(this);
+        this.clickBackwardHandler = this.clickBackwardHandler.bind(this);
         this.state = {started: this.props.started, N: this.props.N, M: this.props.M};
     }
 
@@ -29,6 +30,13 @@ class Panel extends React.Component {
         }
     }
 
+    clickBackwardHandler(event){
+        if (!this.state.started) {
+            //request previous position from server
+            this.props.onBackward();
+        }
+    }
+
     render() {
         const N = this.state.N;
         const M = this.state.M;
@@ -42,6 +50,8 @@ class Panel extends React.Component {
                               disabled={this.props.started} />
                 <button className={"conway-btn " + (this.props.started ? "conway-btn-pressed" : "")} type="button"
                         onClick={this.clickStartHandler}>{this.props.started ? "Stop" : "Start"}</button>
+                <button className={"conway-btn " + (this.props.started ? "conway-btn-pressed" : "")} type="button" 
+                        onClick={this.clickBackwardHandler}>Backward</button>
             </div>
         );
     }

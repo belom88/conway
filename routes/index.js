@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let _ = require('underscore');
+let stateModel = require('../modules/state_model');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -78,10 +79,25 @@ router.post('/do-game', function(req, res, next) {
     });
   });
 
-  res.json({
-    stop_game: stopGame,
-    matrix: newMatrix
+  stateModel.push({matrix: req.body.matrix}, function(err){
+    if (err) console.log(err);
+    res.json({
+      stop_game: stopGame,
+      matrix: newMatrix
+    });
   });
+  
+});
+
+router.post('/backward', function(req, res, next) {
+
+  stateModel.pop(function(err, row){
+    if (err) console.log(err);
+    res.json({
+      matrix: row && row.value ? JSON.parse(row.value.matrix) : null
+    });
+  });
+  
 });
 
 module.exports = router;
